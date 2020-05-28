@@ -1,0 +1,31 @@
+
+
+.cart_item_name_text {
+    width: 150px
+}
+.cart_item_image {
+    padding-top: 15px;
+    padding-left: 15px
+}
+
+.quantity_button_text {
+    font-size: 13px;
+    position: absolute;
+    left: 8px;
+    top: 4px;
+}
+
+.btn-quantity-change, .btn-quantity-change:hover  {
+    border: 1px darkgray solid;
+    border-radius: 0 4px 4px 0;
+    width: 30px;
+    height: 21px;
+    padding: 0;
+}
+
+.quantity-input {
+    background-color: white;
+    border: 1px darkgray solid;
+    width: 40px;
+    border-right: none;
+}
