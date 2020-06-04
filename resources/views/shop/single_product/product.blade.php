@@ -10,8 +10,6 @@
 @endsection
 
 @section('content')
-
-    @include('shop.single_product.breadcrumbs')
 	<!-- Single Product -->
 
 	<div class="single_product">

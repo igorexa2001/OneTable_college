@@ -60,6 +60,7 @@ class CheckoutController extends Controller
         return view('checkout.index',[
             'categories' => $this->categoryRepository->categoriesMenu(),
             'deliveryMethods' => $this->deliveryMethodRepository->findAll(),
+            'cartItems' => app('cart')->getContent(),
         ]);
     }
 
@@ -74,11 +75,8 @@ class CheckoutController extends Controller
 
         $deliveryData = $this->deliveryDataFactory->create();
 
-        if(!$deliveryData->validate($request->all())) {
-            return redirect()->back(['errors' => 'email']);
-        }
-
         $deliveryData->fill($request->all());
+        $deliveryData->full_price += $this->deliveryMethodRepository->findByTitle($request->deliveryMethod)->price;
         $deliveryData->delivery_method_id = $this->deliveryMethodRepository->findByTitle($request->deliveryMethod)->id;
         $deliveryData->save();
 

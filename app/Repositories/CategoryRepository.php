@@ -51,6 +51,6 @@ class CategoryRepository
      */
     public function categoriesMenu()
     {
-        return Category::whereNull('category_id')->with('childrenCategories')->get();
+        return Category::all();
     }
 }

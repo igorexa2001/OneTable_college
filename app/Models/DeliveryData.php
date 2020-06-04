@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class DeliveryData extends Model
 {
     protected $fillable = [
-        'email', 'address1', 'address2', 'city', 'state', 'zip'
+        'email', 'address', 'city', 'state', 'zip', 'name', 'full_price'
     ];
 
     protected $rules = array(

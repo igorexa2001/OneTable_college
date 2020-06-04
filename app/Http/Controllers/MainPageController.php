@@ -64,7 +64,6 @@ class MainPageController extends Controller
             'newItems' => $this->productRepository->findNew(),
             'onSaleItems' => $this->productRepository->findSale(),
             'weRecommendItems' => $this->productRepository->findRecommended(),
-            'popularCategories' => $this->categoryRepository->findPopular(),
             'sliderBrands' => $this->brandRepository->findToSlider(),
             'articles' => $this->articleRepository->findRandom(),
         ]);

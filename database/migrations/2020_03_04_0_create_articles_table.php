@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('text');
             $table->string('path_to_photo');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->timestamps();
         });

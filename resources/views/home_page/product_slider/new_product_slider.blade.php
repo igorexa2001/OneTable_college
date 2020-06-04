@@ -5,7 +5,7 @@
                 <div class="tabbed_container">
 
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Hot New Arrivals</div>
+                        <div class="new_arrivals_title">Новинки</div>
                         <ul class="clearfix">
                             <li class="active"></li>
                         </ul>

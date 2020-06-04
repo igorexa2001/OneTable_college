@@ -8,6 +8,10 @@ class Category extends Model
 {
     public $timestamps = false;
 
+    public $fillable = [
+        'name', 'slug'
+    ];
+
     public function categories() //вызов следующего уровня https://laravel.demiart.ru/recursive-hasmany-relationship-with-unlimited-subcategories/
     {
         return $this->hasMany(Category::class);

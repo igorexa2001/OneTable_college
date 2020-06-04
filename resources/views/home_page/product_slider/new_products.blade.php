@@ -7,18 +7,14 @@
                 <div class="product_border"></div>
                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                     <a href={{route('oneProduct', ['slug' => $newItem->slug])}}>
-                    @if($newItem->productPicture->first() != Null)
-                        <img src={{ asset($newItem->productPicture->first()->path_to_image) }} alt="">
-                    @else
-                        <img src={{ asset('images/products/product_null.png') }} alt="">
-                    @endif
+                        <img src={{$newItem->productPicture->first()->path_to_image }} alt="">
                     </a>
                 </div>
                 <div class="product_content">
                     @if ($newItem->is_sale == 1)
-                        <div class="product_price">{{'$'.$newItem->price}}<span>{{'$'.$newItem->price*1.75}}</span></div>
+                        <div class="product_price">{{$newItem->price.' ₽'}}<span>{{$newItem->price*1.75.' ₽'}}</span></div>
                     @else
-                        <div class="product_price">{{'$'.$newItem->price}}</div>
+                        <div class="product_price">{{$newItem->price.' ₽'}}</div>
                     @endif
                     <div class="product_name">
                         <div>
@@ -26,7 +22,7 @@
                         </div>
                     </div>
                         <div class="product_extras">
-                            <button style="cursor: pointer;" class="buy_button_single product_cart_button" id="buy_button" value="{{$newItem->id}}">Buy</button>
+                            <button style="cursor: pointer;" class="buy_button_single product_cart_button" id="buy_button" value="{{$newItem->id}}">Купить</button>
                         </div>
                 </div>
                 <ul class="product_marks">

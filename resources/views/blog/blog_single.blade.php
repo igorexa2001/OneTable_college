@@ -9,8 +9,6 @@
 
 @section('content')
 <!-- Single Blog Post -->
-
-@include('blog.breadcrumbs')
 <div class="single_post">
     <div class="container">
         <div class="row">
@@ -42,7 +40,7 @@
                         <div class="blog_post">
                             <div class="blog_image" style="background-image: url({{asset($article->path_to_photo)}})"></div>
                             <div class="blog_text">{{$article->title}}</div>
-                            <div class="blog_button"><a href="/blog/{{$article->slug}}">Continue Reading</a></div>
+                            <div class="blog_button"><a href="/blog/{{$article->slug}}">Подробнее...</a></div>
                         </div>
                     @endforeach
 

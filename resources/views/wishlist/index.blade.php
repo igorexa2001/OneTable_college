@@ -16,13 +16,13 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="cart_container">
-                            <div class="cart_title">Wishlist</div>
+                            <div class="cart_title">Список желаемого</div>
                             {{--Wishlist Items--}}
                             @include('wishlist.wishlist_items')
 
                             <div class="cart_buttons">
                                 <button type="button" class="button cart_button_clear">
-                                    <a href="/wishlist/clear" style="color: black"> Clear Wishlist</a>
+                                    <a href="/wishlist/clear" style="color: black"> Очистить список</a>
                                 </button>
                             </div>
                         </div>

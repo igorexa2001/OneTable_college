@@ -21,11 +21,8 @@
     <!-- Recommended Product Panel -->
     @include('home_page.recommended_products')
 
-    <!-- Popular Categories -->
-    @include('home_page.popular_categories')
-
     <!-- Adverts -->
-    @include('home_page.adverts')
+{{--    @include('home_page.adverts')--}}
 
     <!-- Brands Slider -->
     @include('home_page.brands_slider')

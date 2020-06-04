@@ -11,7 +11,7 @@
                         @foreach($sliderBrands as $sliderBrand)
                             <div class="owl-item">
                                 <div class="brands_item d-flex flex-column justify-content-center">
-                                    <img src={{asset($sliderBrand->path_to_logo)}} alt="">
+                                    <img src={{$sliderBrand->logo}} alt="">
                                 </div>
                             </div>
                         @endforeach

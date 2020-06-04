@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'MainPageController@index')->name('index');
+Route::get('/', 'MainPageController@index')->name('home_page');
 
 Route::group(['prefix' => 'blog'], function () {
     Route::get('', 'ArticleController@index')->name('blog');
@@ -49,6 +49,15 @@ Route::group(['prefix' => 'subscribe'], function () {
     Route::post('', 'SubscriberController@store')->name('store_subscriber');
 });
 
-Route::group(['prefix' => 'tournaments'], function () {
-    Route::get('', 'SubscriberController@store')->name('store_subscriber');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('', 'DeliveryDataController@index')->name('admin_index');
+
+    Route::group(['prefix' => 'delivery'], function (){
+        Route::get('show/{delivery}', 'DeliveryDataController@show')->name('show_delivery');
+        Route::put('update/{delivery}', 'DeliveryDataController@update')->name('update_delivery');
+        Route::delete('delete/{delivery}', 'DeliveryDataController@delete')->name('delete_delivery');
+    });
 });
+
+Route::get('/parse', 'ParsingController@parsing');
+

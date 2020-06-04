@@ -30,4 +30,9 @@ class BrandRepository
 
     }
 
+    public function findBySlug($slug)
+    {
+        return Brand::where('slug', $slug)->first();
+    }
+
 }

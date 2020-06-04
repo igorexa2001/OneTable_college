@@ -9,7 +9,6 @@
 
 @section('content')
     <div class="super_container">
-        @include('checkout.breadcrumbs')
 
         <!-- Cart -->
         @include('checkout._checkout')

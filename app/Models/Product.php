@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public $fillable = [
+        'name', 'price', 'description', 'slug', 'is_new', 'is_sale', 'is_recommend'
+    ];
+
     public function category()
     {
         return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');

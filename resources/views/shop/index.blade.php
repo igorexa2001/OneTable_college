@@ -14,14 +14,13 @@
         <div class="home_overlay"></div>
         <div class="home_content d-flex flex-column align-items-center justify-content-center">
             <h2 class="home_title">
-                {{isset($currentCategory) ? $currentCategory->name : 'All Products'}}
+                {{isset($currentCategory) ? $currentCategory->name : 'Все Настольные игры'}}
             </h2>
         </div>
     </div>
 
     <div class="shop">
         <div class="container">
-            @include('shop.breadcrumbs')
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop_sidebar">

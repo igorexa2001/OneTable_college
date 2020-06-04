@@ -66,27 +66,27 @@ class ProductRepository
      * @param $param
      * @return mixed
      */
-    public function findByIndex($query, $param)
+    public function findByIndex($query, $request)
     {
-        if(isset($param['searchString'])) {
-            $query->where('name', 'like', '%'.$param['searchString'].'%');
+        if(isset($request['searchString'])) {
+            $query->where('name', 'like', '%'.$request['searchString'].'%');
         }
 
-        if (isset($param['priceRange'])) {
-            $priceRange = preg_split('/ - /', $param['priceRange']);
+        if (isset($request['priceRange'])) {
+            $priceRange = preg_split('/ - /', $request['priceRange']);
             $query->whereBetween('price', [ltrim($priceRange[0], '$'), ltrim($priceRange[1], '$')]);
         }
 
-        if (isset($param['brand'])) {
-            $query->whereIn('brand_id', $param['brand']);
+        if (isset($request['brand'])) {
+            $query->whereIn('brand_id', $request['brand']);
         }
 
-        if (isset($param['sort'])) {
-            if ($param['sort'] == 'date'){
+        if (isset($request['sort'])) {
+            if ($request['sort'] == 'date'){
                 $query = $query->orderBy('created_at');
-            } elseif ($param['sort'] == 'name'){
+            } elseif ($request['sort'] == 'name'){
                 $query = $query->orderBy('name');
-            } elseif ($param['sort'] == 'price'){
+            } elseif ($request['sort'] == 'price'){
                 $query = $query->orderBy('price');
             } else {
                 $query = $query->orderBy('id');

@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="clearfix tabs-right">
-                        <div class="new_arrivals_title">We recommend</div>
+                        <div class="new_arrivals_title">Выбор пользователей</div>
                     </div>
 
                     <div class="bestsellers_panel panel active">
@@ -20,18 +20,14 @@
                                 <a href="{{route('oneProduct', ['slug' => $weRecommendItem->slug])}}">
                                 <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
                                     <div class="bestsellers_image">
-                                        @if($weRecommendItem->productPicture->first() != Null)
-                                            <img src={{ asset($weRecommendItem->productPicture->first()->path_to_image) }} alt="">
-                                        @else
-                                            <img src={{ asset('images/products/product_null.png') }} alt="">
-                                        @endif
+                                        <img src={{$weRecommendItem->productPicture->first()->path_to_image }} alt="">
                                     </div>
                                     <div class="bestsellers_content">
-                                        <div class="bestsellers_category"><a href="/shop/{{$weRecommendItem->category()->first()->slug}}">{{$weRecommendItem->category()->first()->name}}</a></div>
+{{--                                        <div class="bestsellers_category"><a href="/shop/{{$weRecommendItem->category()->first()->slug}}">{{$weRecommendItem->category()->first()->name}}</a></div>--}}
                                         <div class="bestsellers_name"><a href="/shop/product/{{$weRecommendItem->slug}}">{{$weRecommendItem->name}}</a></div>
                                         <div class="rating_r rating_r_4 bestsellers_rating"></div>
-                                        <div class="bestsellers_price {{$weRecommendItem->is_sale ? 'discount' : ''}}">${{$weRecommendItem->price}}
-                                            {{$weRecommendItem->is_sale ? `<span>($weRecommendItem->price*1.75)</span>` : ''}}
+                                        <div class="bestsellers_price {{$weRecommendItem->is_sale ? 'discount' : ''}}">{{$weRecommendItem->price.' ₽'}}
+                                            {{$weRecommendItem->is_sale ? `<span>($weRecommendItem->price*1.75.' ₽')</span>` : ''}}
                                         </div>
                                     </div>
                                 </div>

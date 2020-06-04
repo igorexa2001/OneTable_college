@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png">
+    <link rel="icon" href="{{asset('images/favicon.png')}}" type="image/png">
+
     <link rel="stylesheet" type="text/css" href={{ asset('css/bootstrap4/bootstrap.min.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}>
@@ -42,13 +45,13 @@
                             <a href="mailto:{{settings('email')}}">{{settings('email')}}</a>
                         </div>
 
-                        <div class="top_bar_content ml-auto">
-                            <div class="top_bar_user">
-                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
-                                <div><a href="#">Register</a></div>
-                                <div><a href="#">Sign in</a></div>
-                            </div>
-                        </div>
+{{--                        <div class="top_bar_content ml-auto">--}}
+{{--                            <div class="top_bar_user">--}}
+{{--                                <div class="user_icon"><img src="images/user.svg" alt=""></div>--}}
+{{--                                <div><a href="#">Register</a></div>--}}
+{{--                                <div><a href="#">Sign in</a></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

@@ -10,12 +10,12 @@
 @section('content')
     <div class="super_container">
         <div class="container" style="padding: 50px">
-            <h2>Success</h2>
+            <h2>Удачно</h2>
             <hr>
-            <p>Your order is accepted for processing</p>
-            <p>Order unique number - <b>#NSK-{{$deliveryId}}</b></p>
-            <p>We will contact you later to check</p>
-            <p>Thank you</p>
+            <p>Ваш заказ принят в обработку</p>
+            <p>Уникальный номер заказа - <b>{{$deliveryId}}</b></p>
+            <p>Наш менеджер свяжется с вами для подтверждения</p>
+            <p>Спасибо</p>
             <hr>
             <p>OneTable</p>
         </div>

@@ -15,7 +15,7 @@
                     <div class="header_search_content">
                         <div class="header_search_form_container">
                             <form action="/shop/filter" method="get" class="header_search_form clearfix">
-                                <input type="search" required="required" class="header_search_input" placeholder="Search for products..." name="searchString">
+                                <input type="search" required="required" class="header_search_input" placeholder="Поиск..." name="searchString">
                                 <button type="submit" class="header_search_button trans_300" value="Submit"><img src={{asset('images/search.png')}} alt=""></button>
                             </form>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist_icon"><img src= {{asset('images/heart.png')}} alt=""></div>
                         <div class="wishlist_content">
-                            <div class="wishlist_text"><a href="/wishlist">Wishlist</a></div>
+                            <div class="wishlist_text"><a href="/wishlist">Желаемое</a></div>
                             <div class="wishlist_count">{{app('wishlist')->getTotalQuantity()}}</div>
                         </div>
                     </div>
@@ -42,8 +42,8 @@
                                 <div class="cart_count" ><span id="cart_count">{{app('cart')->getTotalQuantity()}}</span></div>
                             </div>
                             <div class="cart_content">
-                                <div class="cart_text"><a href="/cart">Cart</a></div>
-                                <div class="cart_price" id="cart_price">${{app('cart')->getSubTotal()}}</div>
+                                <div class="cart_text"><a href="/cart">Корзина</a></div>
+                                <div class="cart_price" id="cart_price">{{app('cart')->getSubTotal().' ₽'}}</div>
                             </div>
                         </div>
                     </div>

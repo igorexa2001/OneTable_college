@@ -1,5 +1,5 @@
 <div class="sidebar_section">
-    <div class="sidebar_title">Categories</div>
+    <div class="sidebar_title">Категории</div>
     <ul class="sidebar_categories">
 
         @foreach ($categories as $category)

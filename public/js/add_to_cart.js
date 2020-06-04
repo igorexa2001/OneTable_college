@@ -15,7 +15,7 @@ $(document).ready(function () {
                 $("#cart_count").html(data.count);
 
                 console.log(data.totalPrice);
-                $("#cart_price").html('$'+data.totalPrice.toFixed(2));
+                $("#cart_price").html(data.totalPrice.toFixed(2)+' ₽');
                 $('#modal').modal('show');
             },
 

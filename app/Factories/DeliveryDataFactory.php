@@ -1,7 +1,7 @@
 <?php
 namespace App\Factories;
 
-use App\DeliveryData;
+use App\Models\DeliveryData;
 
 class DeliveryDataFactory
 {

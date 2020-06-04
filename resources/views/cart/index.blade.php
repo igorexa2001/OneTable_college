@@ -18,30 +18,30 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="cart_container">
-                            <div class="cart_title">Shopping Cart</div>
+                            <div class="cart_title">Корзина</div>
 
                             @if($cartItems->isEmpty())
-                                <div class="empty-cart" style="text-align: center"> Cart is empty </div>
+                                <div class="empty-cart" style="text-align: center"> Ваша корзина пуста </div>
                             @else
                                 {{--Cart Items--}}
                                 @include('cart.cart_items')
                             <!-- Order Total -->
                                 <div class="order_total">
                                     <div class="order_total_content text-md-right">
-                                        <div class="order_total_title">Order Total:</div>
-                                        <div class="order_total_amount">${{app('cart')->getTotal()}}</div>
+                                        <div class="order_total_title">Сумма заказа: </div>
+                                        <div class="order_total_amount">{{app('cart')->getTotal().' ₽'}}</div>
                                     </div>
                                 </div>
 
                                 <div class="cart_buttons">
                                     <a href='{{route('cart_clear')}}' style="margin: -10px">
                                         <button type="button" class="button cart_button_clear">
-                                            Clear Cart
+                                            Очистить корзину
                                         </button>
                                     </a>
                                     <a href={{route('checkout_index')}}>
                                         <button type="submit" class="button cart_button_checkout" {{app('cart')->getContent()->isEmpty() ? 'disabled' : ''}}>
-                                            Сheckout
+                                            Оформить заказ
                                         </button>
                                     </a>
                                 </div>

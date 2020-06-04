@@ -10,11 +10,11 @@
 @section('content')
     <div class="super_container">
         <div class="container" style="padding: 50px">
-            <h2>Success</h2>
+            <h2>Удачно</h2>
             <hr>
-            <p>Your message is really important for us</p>
-            <p>We will contact you later</p>
-            <p>Thank you</p>
+            <p>Ваше сообщение очень важно для нас</p>
+            <p>Скоро с вами свяжутся наши специалисты</p>
+            <p>Спасибо за отклик</p>
             <hr>
             <p>OneTable</p>
         </div>

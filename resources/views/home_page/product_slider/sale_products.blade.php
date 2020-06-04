@@ -5,20 +5,16 @@
                  style="cursor: default">
                 <div class="product_border"></div>
                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                    @if($onSaleItem->productPicture->first() != Null)
-                        <img src={{ asset($onSaleItem->productPicture->first()->path_to_image) }} alt="">
-                    @else
-                        <img src={{ asset('images/products/product_null.png') }} alt="">
-                    @endif
+                    <img src={{ $onSaleItem->productPicture->first()->path_to_image }} alt="">
                 </div>
                 <div class="product_content d-flex flex-column align-items-center justify-content-center">
                     @if ($onSaleItem->is_sale == 1)
-                        <div class="product_price">{{'$'.$onSaleItem->price*0.75}}<span>{{'$'.$onSaleItem->price}}</span></div>
+                        <div class="product_price">{{$onSaleItem->price*0.75.' ₽'}}<span>{{$onSaleItem->price.' ₽'}}</span></div>
                     @else
-                        <div class="product_price">{{'$'.$onSaleItem->price}}</div>
+                        <div class="product_price">{{$onSaleItem->price.' ₽'}}</div>
                     @endif
                     <div class="product_name"><div><a href="/shop/product/{{$onSaleItem->slug}}" tabindex="0">{{$onSaleItem->name}}</a></div></div>
-                    <button class="btn-primary buy_button_single" id="buy_button" value="{{$onSaleItem->id}}">Buy</button>
+                    <button class="btn-primary buy_button_single" id="buy_button" value="{{$onSaleItem->id}}">Купить</button>
                 </div>
                 {{--                                                <div class="product_fav {{ app('wishlist')->getContent()->contains('id', $onSaleItem->id) ? "active" : "" }}">--}}
                 {{--                                                    <input type="text" value="{{ $onSaleItem->id }}" class="d-none product_fav_value"><i--}}

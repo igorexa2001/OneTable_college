@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->float('price');
             $table->text('description');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->boolean('is_new');
             $table->boolean('is_sale');
             $table->boolean('is_recommend');

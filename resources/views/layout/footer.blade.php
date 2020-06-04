@@ -17,7 +17,7 @@
 
             <div class="col-lg-2 offset-lg-2">
                 <div class="footer_column">
-                    <div class="footer_title">Got Question? Call Us 24/7</div>
+                    <div class="footer_title">Есть вопросы? Наш телефон:</div>
                     <div class="footer_phone">{{settings('phone')}}</div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
 
             <div class="col-lg-2">
                 <div class="footer_column">
-                    <div class="footer_title">Best Categories</div>
+                    <div class="footer_title">Популярные категории</div>
                     <ul class="footer_list">
                         @foreach($categories as $category)
                             <li><a href='/shop/{{$category->slug}}'>{{$category->name}}</a></li>

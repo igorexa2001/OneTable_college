@@ -4,22 +4,18 @@
         @foreach($cartItems as $cartItem)
             <li class="cart_item clearfix">
                 <div id={{$cartItem->id}}>
-                <div class="cart_item_image" >
-                    @if($cartItem->associatedModel->productPicture->first() != null)
-                        <img src={{ asset($cartItem->associatedModel->productPicture->first()->path_to_image) }} alt="">
-                    @else
-                        <img src={{ asset('images/products/product_null.png') }} alt="">
-                    @endif
-                </div>
+                    <div class="cart_item_image" >
+                        <img src={{$cartItem->associatedModel->productPicture->first()->path_to_image}} alt="">
+                    </div>
                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                     <div class="cart_item_name cart_info_col">
-                        <div class="cart_item_title">Name</div>
+                        <div class="cart_item_title">Название</div>
                         <div class="cart_item_text cart_item_name_text">
                             <a  href="/shop/product/{{$cartItem->associatedModel->slug}}"> {{$cartItem->name}} </a>
                         </div>
                     </div>
                     <div class="cart_item_quantity cart_info_col">
-                        <div class="cart_item_title">Quantity</div>
+                        <div class="cart_item_title">Количество</div>
 {{--                        <div class="cart_item_text cart_item_quantity_{{$cartItem->id}}">{{$cartItem->quantity}}</div>--}}
                         <div class="cart_item_text" style="width: 100px">
                             <div class="input-group" style="height: 40px">
@@ -44,19 +40,19 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
                     <div class="cart_item_price cart_info_col">
-                        <div class="cart_item_title">Price</div>
-                        <div class="cart_item_text">${{$cartItem->price}}</div>
+                        <div class="cart_item_title">Цена</div>
+                        <div class="cart_item_text">{{$cartItem->price.' ₽'}}</div>
                     </div>
                     <div class="cart_item_total cart_info_col" style="width: 100px">
-                        <div class="cart_item_title">Total</div>
-                        <div class="cart_item_text cart_item_total_{{$cartItem->id}}">${{$cartItem->getPriceSum()}}</div>
+                        <div class="cart_item_title">Всего</div>
+                        <div class="cart_item_text cart_item_total_{{$cartItem->id}}">{{$cartItem->getPriceSum().' ₽'}}</div>
                     </div>
 
                     <div class="cart_item_total">
                         {{ Form::open(['route' => ['delete_from_cart', 'id' => $cartItem->id], 'method' => 'delete']) }}
                             <div class="cart_item_title"></div>
                             <div class="cart_item_text" style="padding-top: 15px">
-                                <input type="submit" class="btn btn-danger" value="Delete">
+                                <input type="submit" class="btn btn-danger" value="Удалить">
                             </div>
                         {{ Form::close() }}
 

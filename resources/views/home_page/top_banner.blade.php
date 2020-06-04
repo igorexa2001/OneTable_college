@@ -14,23 +14,22 @@
                                 <div class="col-lg-4 col-md-6 fill_height">
                                     <div class="banner_2_content">
                                         <div class="banner_2_category">
-                                            <a href="/shop/{{$mainSliderItem->product->category()->first()->slug}}">{{$mainSliderItem->product->category()->first()->name}}</a>
+                                            @foreach($mainSliderItem->product->category()->get() as $category)
+                                                <a href="/shop/{{$category->slug}}" style="margin-right: 10px">{{$category->name}}</a>
+                                            @endforeach
                                         </div>
                                         <div class="banner_2_title">{{$mainSliderItem->product->name}}</div>
                                         <div class="banner_2_text">{{$mainSliderItem->product->description}}</div>
                                         <div class="rating_r rating_r_4 banner_2_rating"></div>
-                                        <div class="button banner_2_button"><a href="/shop/product/{{$mainSliderItem->product->slug}}">Explore</a></div>
+                                        <div class="button banner_2_button"><a href="/shop/product/{{$mainSliderItem->product->slug}}">Подробнее</a></div>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-8 col-md-6 fill_height">
                                     <div class="banner_2_image_container">
                                         <div class="banner_2_image">
-                                            @if($mainSliderItem->product->productPicture->first())
-                                                <img src={{asset($mainSliderItem->product->productPicture->first()->path_to_image)}} alt="">
-                                            @else
-                                                <img src={{ asset('images/products/product_null.png') }} alt="">
-                                            @endif
+                                            <img src="{{$mainSliderItem->product->productPicture->first()->path_to_image}}"
+                                                style="width: 70%; margin-left: 70px;" alt="">
                                         </div>
                                     </div>
                                 </div>

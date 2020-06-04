@@ -8,6 +8,10 @@ class Brand extends Model
 {
     public $timestamps = false;
 
+    public $fillable = [
+        'name', 'slug'
+    ];
+
     public function brandSlider()
     {
         return $this->belongsTo(BrandSlider::class);

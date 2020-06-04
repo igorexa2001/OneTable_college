@@ -15,9 +15,10 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug')->unique();
             $table->string('name');
-            $table->string('path_to_logo');
-            $table->boolean('is_in_slider');
+            $table->string('logo')->nullable();
+            $table->boolean('is_in_slider')->default(false);
         });
     }
 
