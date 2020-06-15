@@ -49,15 +49,41 @@ Route::group(['prefix' => 'subscribe'], function () {
     Route::post('', 'SubscriberController@store')->name('store_subscriber');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'killme', 'namespace' => 'Killme'], function () {
     Route::get('', 'DeliveryDataController@index')->name('admin_index');
 
-    Route::group(['prefix' => 'delivery'], function (){
+    Route::group(['prefix' => 'delivery'], function () {
         Route::get('show/{delivery}', 'DeliveryDataController@show')->name('show_delivery');
         Route::put('update/{delivery}', 'DeliveryDataController@update')->name('update_delivery');
         Route::delete('delete/{delivery}', 'DeliveryDataController@delete')->name('delete_delivery');
+    });
+
+    Route::group(['prefix' => 'shop'], function () {
+        Route::group(['prefix' => 'products'], function () {
+
+        });
+        Route::group(['prefix' => 'categories'], function () {
+
+        });
+        Route::group(['prefix' => 'brands'], function () {
+
+        });
     });
 });
 
 Route::get('/parse', 'ParsingController@parsing');
 
+
+
+Route::group(['prefix' => 'admin'], function ()
+{
+    Voyager::routes();
+
+    Route::group(['prefix' => '/deliveries', 'namespace' => 'Admin'], function ()
+    {
+        Route::get('', 'DeliveryDataController@index')->name('delivery_index');
+        Route::get('show/{delivery}', 'DeliveryDataController@show')->name('show_delivery');
+        Route::put('update/{delivery}', 'DeliveryDataController@update')->name('update_delivery');
+        Route::delete('delete/{delivery}', 'DeliveryDataController@delete')->name('delete_delivery');
+    });
+});

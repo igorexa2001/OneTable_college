@@ -1672,6 +1672,8 @@ select option
 	display: block;
 	position: relative;
 	max-width: 100%;
+    width: 115px;
+    height: 115px;
 }
 .product_content
 {

@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     public $fillable = [
-        'name', 'price', 'description', 'slug', 'is_new', 'is_sale', 'is_recommend'
+        'name',
+        'price',
+        'description',
+        'slug',
+        'is_new',
+        'is_sale',
+        'is_recommend',
+        'rules_link',
     ];
 
     public function category()
@@ -33,5 +40,13 @@ class Product extends Model
     public function productSlider()
     {
         return $this->hasMany(ProductSlider::class);
+    }
+
+    public function delete()
+    {
+        $this->productPicture()->delete();
+        $this->category()->detach();
+
+        return parent::delete();
     }
 }

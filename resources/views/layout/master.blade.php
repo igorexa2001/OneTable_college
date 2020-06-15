@@ -44,14 +44,6 @@
                             </div>
                             <a href="mailto:{{settings('email')}}">{{settings('email')}}</a>
                         </div>
-
-{{--                        <div class="top_bar_content ml-auto">--}}
-{{--                            <div class="top_bar_user">--}}
-{{--                                <div class="user_icon"><img src="images/user.svg" alt=""></div>--}}
-{{--                                <div><a href="#">Register</a></div>--}}
-{{--                                <div><a href="#">Sign in</a></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
             </div>

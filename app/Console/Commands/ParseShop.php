@@ -57,10 +57,13 @@ class ParseShop extends Command
      */
     public function handle()
     {
+
         $categories = $this->parseCategories();
-        for ($i = 6; $i < 6; $i++) {
+
+        for ($i = 0; $i < 10; $i++) {
             $url = 'https://hobbygames.ru/nastolnie?page=' . $i . '&parameter_type=0';
             $products = $this->parsePage($url, $categories);
+
             $brandConst = [];
             foreach ($this->brandRepository->findAll() as $brand) {
                 $brandConst[] = [
@@ -68,61 +71,19 @@ class ParseShop extends Command
                     'slug' => $brand->slug,
                 ];
             }
+
             $brands = $this->getBrands($products, $brandConst);
 
             $this->pushToDatabase($categories, $products, $brands);
-
         }
-        $this->productRepository->findAll()->dd();
 
         dd([
             'products' => $products,
             'brands' => $brands,
             'categories' => $categories
         ]);
-        return 'OK';
-    }
 
-    private function pushToDatabase($categories, $products, $brands)
-    {
-
-        foreach ($categories as $category) {
-            $model = new Category();
-            $model->fill($category);
-//            $model->save();
-        }
-
-        $brandConst = [];
-        foreach ($this->brandRepository->findAll() as $brand) {
-            $brandConst[] = [
-                'name' => $brand->name,
-                'slug' => $brand->slug,
-            ];
-        }
-        foreach ($brands as $brand) {
-            if (!in_array($brand, $brandConst)){
-                $model = new Brand();
-                $model->fill($brand);
-                $model->save();
-            }
-        }
-
-        foreach ($products as $product) {
-            $model = new Product();
-            $model->fill($product);
-            $model->brand_id = $this->brandRepository->findBySlug($product['brand']['slug'])->id;
-            $model->save();
-            foreach ($product['categories'] as $category){
-                $categoryModel = $this->categoryRepository->findBySlug($category);
-                $model->category()->attach($categoryModel);
-            }
-            foreach ($product['images'] as $image) {
-                $productPicture = new ProductPicture();
-                $productPicture->product_id = $this->productRepository->findBySlug($product['slug'])->id;
-                $productPicture->path_to_image = $image;
-                $productPicture->save();
-            }
-        }
+        return 'OK '.$this->productRepository->findAll()->count();
     }
 
     private function getBrands($products, $brands = [])
@@ -153,24 +114,61 @@ class ParseShop extends Command
         $domProduct = new Dom;
         $domProduct->loadFromUrl($url);
         return [
-            'name' => $domProduct->find('h1')->text(),
+            'name' => $this->parseProductName($domProduct),
             'price' => $this->parseProductPrice($domProduct),
             'description' => $this->parseProductDescription($domProduct),
-            'slug' => str_ireplace('/','', parse_url($url, PHP_URL_PATH)),
+            'slug' => $this->parseProductSlug($url),
             'images' => $this->parseProductImages($domProduct),
+            'categories' => $this->parseProductCategories($domProduct, $categories),
+            'brand' => $this->parseProductBrand($domProduct),
+            'rules_link' => $this->parseProductRulesLink($domProduct),
             'is_recommend' => rand (0, 5) == 1 ? true : false,
             'is_new' => rand (0, 5) == 1 ? true : false,
             'is_sale' => rand (0, 5) == 1 ? true : false,
-            'categories' => $this->parseProductCategories($domProduct, $categories),
-            'brand' => $this->parseProductBrand($domProduct),
         ];
+    }
+
+    private function parseProductName($domProduct)
+    {
+        return $domProduct->find('h1')->text() ?? null;
     }
 
     private function parseProductPrice($domProduct)
     {
         $price = (int)str_ireplace('&nbsp;₽','', $domProduct->find('div.price')->text());
-        if ($price < 10) $price = $price * 1000 + 990 ;
+        if ($price < 12) $price = $price * 1000 + 990 ;
         return $price;
+    }
+
+    private function parseProductDescription($dom)
+    {
+        try {
+            $description = $dom->find('div#desc')->find('p')->firstChild()->text();
+            $description = str_ireplace('&nbsp;',' ', $description);
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return (($description != '') && ($description != ' ') && $description) ? $description : null;
+    }
+
+    private function parseProductSlug($productUrl)
+    {
+        return str_ireplace('/','', parse_url($productUrl, PHP_URL_PATH));
+    }
+
+    private function parseProductImages($dom)
+    {
+        $images = [];
+        $counter = -1;
+        foreach ($dom->find('a.lightGallery') as $image) {
+            if ($counter++ == 3) break;
+
+            $link = $image->getAttribute('href');
+            $images[] = (@get_headers($link) && strpos(@get_headers($link)[0], '200')) ? $link : null;
+        }
+
+        return $images ?? null;
     }
 
     private function parseProductCategories($domProduct, $categoriesConst)
@@ -187,31 +185,6 @@ class ParseShop extends Command
         return $categories;
     }
 
-    private function parseProductImages($dom)
-    {
-        $images = [];
-        $i = 0;
-        foreach ($dom->find('a.lightGallery') as $image) {
-            $i++;
-            $images[] = $image->getAttribute('href');
-            if ($i == 2) break;
-        }
-
-        return $images;
-    }
-
-    private function parseProductDescription($dom)
-    {
-        try {
-            $description = $dom->find('div#desc')->find('p')->firstChild()->text();
-            $description = str_ireplace('&nbsp;',' ', $description);
-        } catch (\Exception $e) {
-            return null;
-        }
-
-        return $description;
-    }
-
     private function parseProductBrand($domProduct)
     {
         $brandBlocks = $domProduct->find('div.manufacturers')->find('.col-md-3');
@@ -224,6 +197,17 @@ class ParseShop extends Command
             }
         }
         return null;
+    }
+
+    private function parseProductRulesLink($domProduct)
+    {
+        $rulesLinkBlock = $domProduct->find('div.rules');
+
+        if ($rulesLinkBlock >= 1) {
+            $rulesLink = $rulesLinkBlock->find('a')->getAttribute('href');
+        }
+
+        return $rulesLink ?? null;
     }
 
     private function parseCategories()
@@ -245,5 +229,54 @@ class ParseShop extends Command
             'name' => $block->find('a')->text(),
             'slug' => str_ireplace('/','', parse_url($url, PHP_URL_PATH)),
         ];
+    }
+
+
+    private function pushToDatabase($categories, $products, $brands)
+    {
+//        Push categories
+//        foreach ($categories as $category) {
+//            $model = new Category();
+//            $model->fill($category);
+//            $model->save();
+//        }
+
+//        Push brands
+        $brandConst = [];
+        foreach ($this->brandRepository->findAll() as $brand) {
+            $brandConst[] = [
+                'name' => $brand->name,
+                'slug' => $brand->slug,
+            ];
+        }
+        foreach ($brands as $brand) {
+            if (!in_array($brand, $brandConst)){
+                $model = new Brand();
+                $model->fill($brand);
+                $model->save();
+            }
+        }
+
+//        push Products
+        foreach ($products as $product) {
+            if (!in_array(null, $product)) {
+                $model = new Product();
+                $model->fill($product);
+                $model->brand_id = $this->brandRepository->findBySlug($product['brand']['slug'])->id;
+                $model->save();
+
+                foreach ($product['categories'] as $category){
+                    $categoryModel = $this->categoryRepository->findBySlug($category);
+                    $model->category()->attach($categoryModel);
+                }
+
+                foreach ($product['images'] as $image) {
+                    $productPicture = new ProductPicture();
+                    $productPicture->product_id = $this->productRepository->findBySlug($product['slug'])->id;
+                    $productPicture->path_to_image = $image;
+                    $productPicture->save();
+                }
+            }
+        }
     }
 }

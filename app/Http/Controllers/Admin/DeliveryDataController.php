@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\DeliveryData;
 use App\Repositories\DeliveryDataRepository;
 use http\Env\Request;
 
